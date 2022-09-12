@@ -4,7 +4,7 @@
 
 **Supervised by:** [Nick Wilkinson](https://www.linkedin.com/in/nicholas-wilkinson/)
 
-**Project Duration:** May 2, 20220-August 26, 2022
+**Project Duration:** May 2, 2022-August 26, 2022
 
 *Note*: In collaboration with the University of British Columbia Co-op Program and [Two Tall Totems Studios](https://ttt.studio/).
 
