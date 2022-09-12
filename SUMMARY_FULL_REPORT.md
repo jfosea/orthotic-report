@@ -1,4 +1,4 @@
-Kintec Full Summary Report
+Custom Orthotic Shell Prediction-Full Summary Report
 ================
 
 **Create by:** Jana Osea
@@ -48,7 +48,7 @@ exciting field in machine learning.
 After careful consideration of various machine learning methods, we
 conclude that a Convolution Neural Network (CNN) is an effective method
 to predict a shell output for a corresponding cleaned foot input. Each
-foot triangular mesh is processed into 2D images and laebelled into 8
+foot triangular mesh is processed into 2D images and labelled into 8
 categories (wide or narrow width, long or short length, or low or high
 arch). The 2 CNN model achieves an accuracy of 0.71 for both the right
 and left foot correspondingly. Post processing after classification
@@ -106,7 +106,7 @@ For example, the plot below shows the number of vertices for the right
 bottom shells from *Direct Mill*. This is the similar result we see for
 left top shells from both data mills.
 
-<img src="SUMMARY_files/figure-gfm/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
+<img src="SUMMARY_FULL_REPORT_files/figure-gfm/unnamed-chunk-3-1.png" style="display: block; margin: auto;" />
 
 Next, we explore if there are factors found in the data that explains
 the different number of shell vertices. We use *Direct Mill* right
@@ -118,7 +118,7 @@ the mean number of vertices of the shell as shown below.
 
     ## <BarContainer object of 13 artists>
 
-<img src="SUMMARY_files/figure-gfm/unnamed-chunk-4-3.png" style="display: block; margin: auto;" />
+<img src="SUMMARY_FULL_REPORT_files/figure-gfm/unnamed-chunk-4-3.png" style="display: block; margin: auto;" />
 
 In addition, the support rating also does not have a significant effect
 on the mean number of vertices. Furthermore, both of these variables
@@ -127,7 +127,7 @@ variables that affect the number of vertices.
 
     ## <BarContainer object of 4 artists>
 
-<img src="SUMMARY_files/figure-gfm/unnamed-chunk-5-5.png" style="display: block; margin: auto;" />
+<img src="SUMMARY_FULL_REPORT_files/figure-gfm/unnamed-chunk-5-5.png" style="display: block; margin: auto;" />
 
 After exploring additional variables in *Order form*, we find that there
 are no variables that significantly affect the number of shell vertices.
@@ -141,11 +141,11 @@ number of vertices for the right foot clean scan is quite different
 compared to the right bottom shell as compared to the figure in section
 1.2.
 
-<img src="SUMMARY_files/figure-gfm/unnamed-chunk-6-7.png" style="display: block; margin: auto;" />
+<img src="SUMMARY_FULL_REPORT_files/figure-gfm/unnamed-chunk-6-7.png" style="display: block; margin: auto;" />
 
 After filtering the cleaned foot scans to only the sections of the foot
-needed for shell, we find that there are more shells that are less dense
-than the corresponding foot scan as shown below.
+needed for the shell, we find that there are more shells that are less
+dense than the corresponding foot scan as shown below.
 
     ## diff_cat1
     ## Shell is less dense    604
@@ -154,9 +154,7 @@ than the corresponding foot scan as shown below.
 
 We conclude that the model we create must be able to adapt to the
 different number of vertices both for the cleaned foot scan and the
-shells. For more details on the exploration of the number of vertices
-between the foot mesh and the shell mesh, please go to the *eda* folder
-in *src*.
+shells.
 
 ## 2 Review of Current Methods Used for 3D Prediction
 
@@ -286,16 +284,15 @@ as a ball is applied to it.
 
 ![GNN Adaptive Mesh](SUMMARY_files/gnn.png)
 
-GNN can be used to solve our predict a shell from a clean foot input as
-we can train a GNN to interpret the input as an initial time point and
-the predicted shell as the next time point. Each vertex in the input
-foot scan will have a different predicted location in th predicted
-shell.
+GNN can be used to predict a shell from a clean foot input as we can
+train a GNN to interpret the input as an initial time point and the
+predicted shell as the next time point. Each vertex in the input foot
+scan will have a different predicted location in th predicted shell.
 
 **Limitation:** GNN requires the same number of vertices in the initial
 time point and the next time point. In addition, there must be a
 one-to-one relationship between all the vertices at each time point. The
-primary limitation of using a GNN for the Kintec data is that it is
+primary limitation of using a GNN for the orthotic data is that it is
 difficult to optimally create a one-to-one relationship between the
 input foot scan and the corresponding predicted shell for each foot. As
 explored in section [1.3 Exploring Number of Vertices Between Foot
@@ -311,7 +308,7 @@ case as shown in section [1.2 Analysis of Number of
 Vertices](#12-analysis-of-number-of-vertices).
 
 Hence, although this method provides an interesting way to predict
-triangular meshes, the Kintec dataset may not be the most appropriate
+triangular meshes, the orthotic dataset may not be the most appropriate
 type of data for this methodology.
 
 #### 3.3 Convolutional Neural Network
@@ -324,7 +321,7 @@ they have a combination of narrow or wide width, short or long length,
 or low or high arch.
 
 *Mesh Processing and Data Loading:* The triangular mesh data is first
-processed to using [Trimesh](https://trimsh.org/trimesh.html) and
+processed using [Trimesh](https://trimsh.org/trimesh.html) and
 [Matplotlib](https://matplotlib.org/) to transform the data into a 2D
 image as shown below. Each foot was arbitrarily classified as one of the
 8 labels according to if the max x, y, z vertex is above or below the
@@ -375,9 +372,7 @@ most resembles the input foot using a series of functions.
 
 The CNN method provides the most feasible method to solve the objective.
 There are 2 CNN models generated, one for each of the top shell
-prediction for the left and right foot correspondingly. The full
-implementation of the model can be viewed
-[here](https://github.com/jfosea/kintec-3/blob/main/src/modelling/model.ipynb).
+prediction for the left and right foot correspondingly.
 
 Note: For more information about the basics of understanding
 Convolutional Neural Networks, please refer to
@@ -388,10 +383,7 @@ article.
 
 We specifically examine the results from the right foot shell model.
 Please note that the results are very similar in the model for the left
-foot shell prediction which will not be examined here due to redudancy
-(note: the left model results can be viewed
-[here](https://github.com/jfosea/kintec-3/blob/main/src/modelling/model.ipynb)
-).
+foot shell prediction which will not be examined here due to redundancy.
 
 The training and validation accuracy and loss can be seen below where
 the x-axis is each epoch. The margin of accuracy between the training
@@ -426,10 +418,10 @@ rendering of a sample shell related to the predicted label.
 Limitations exist in that each foot is categorized into a specific label
 based on the max values of the X, Y, and Z vertices. There are instances
 where the foot scans contain noise vertices produced by man-made error
-or production error and so the max values are not robust to determine
-the max values of the actual foot. Hence, future work lies in producing
-a more robust method to label each foot that is not based on absolute
-max values for each vertex axis.
+or production error. Hence, certain max values are not robust in
+determining the max values of the actual foot. Future work lies in
+producing a more robust method to label each foot that is not based on
+absolute max values for each vertex axis.
 
 Another limitation lies in choosing the shell triangular mesh after the
 model predicts a label for a corresponding foot input. Due to time
@@ -437,3 +429,76 @@ constraints, this process is primitive in that it only takes an
 arbitrary shell from each category. Future work lies in generating a
 more extensive method to produce a corresponding shell triangular mesh
 for each label.
+
+## 6 References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-tensorflow2015-whitepaper" class="csl-entry">
+
+Abadi, Martín, Ashish Agarwal, Paul Barham, Eugene Brevdo, Zhifeng Chen,
+Craig Citro, Greg S. Corrado, et al. 2015. “TensorFlow: Large-Scale
+Machine Learning on Heterogeneous Systems.”
+<https://www.tensorflow.org/>.
+
+</div>
+
+<div id="ref-ari2014matplotlib" class="csl-entry">
+
+Ari, Niyazi, and Makhamadsulton Ustazhanov. 2014. “Matplotlib in
+Python.” In *2014 11th International Conference on Electronics, Computer
+and Computation (ICECCO)*, 1–6. IEEE.
+
+</div>
+
+<div id="ref-cherchi2019py3dviewer" class="csl-entry">
+
+Cherchi, Gianmarco, Luca Pitzalis, Giovanni Laerte Frongia, and Riccardo
+Scateni. 2019. “The Py3DViewer Project: A Python Library for Fast
+Prototyping in Geometry Processing.” In *STAG*, 121–28.
+
+</div>
+
+<div id="ref-hanocka2019meshcnn" class="csl-entry">
+
+Hanocka, Rana, Amir Hertz, Noa Fish, Raja Giryes, Shachar Fleishman, and
+Daniel Cohen-Or. 2019. “Meshcnn: A Network with an Edge.” *ACM
+Transactions on Graphics (TOG)* 38 (4): 1–12.
+
+</div>
+
+<div id="ref-NEURIPS2019_9015" class="csl-entry">
+
+Paszke, Adam, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury,
+Gregory Chanan, Trevor Killeen, et al. 2019. “PyTorch: An Imperative
+Style, High-Performance Deep Learning Library.” In *Advances in Neural
+Information Processing Systems 32*, 8024–35. Curran Associates, Inc.
+<http://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library.pdf>.
+
+</div>
+
+<div id="ref-pfaff2020learning" class="csl-entry">
+
+Pfaff, Tobias, Meire Fortunato, Alvaro Sanchez-Gonzalez, and Peter W
+Battaglia. 2020. “Learning Mesh-Based Simulation with Graph Networks.”
+*arXiv Preprint arXiv:2010.03409*.
+
+</div>
+
+<div id="ref-ravi2020accelerating" class="csl-entry">
+
+Ravi, Nikhila, Jeremy Reizenstein, David Novotny, Taylor Gordon, Wan-Yen
+Lo, Justin Johnson, and Georgia Gkioxari. 2020. “Accelerating 3d Deep
+Learning with Pytorch3d.” *arXiv Preprint arXiv:2007.08501*.
+
+</div>
+
+<div id="ref-zhang2020meshingnet" class="csl-entry">
+
+Zhang, Zheyan, Yongxing Wang, Peter K Jimack, and He Wang. 2020.
+“MeshingNet: A New Mesh Generation Method Based on Deep Learning.” In
+*International Conference on Computational Science*, 186–98. Springer.
+
+</div>
+
+</div>
